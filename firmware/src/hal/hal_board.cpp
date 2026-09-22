@@ -33,14 +33,13 @@ void HalBoard::setBrightness(uint8_t brightness) {
 
 void HalBoard::turnScreenOn() {
     m_screenOn = true;
+    M5.Display.wakeup();
     M5.Display.setBrightness(m_brightness > 0 ? m_brightness : 128);
-    M5.Display.sleep(false);
 }
 
 void HalBoard::turnScreenOff() {
     m_screenOn = false;
-    M5.Display.setBrightness(0);
-    M5.Display.sleep(true);
+    M5.Display.sleep();
 }
 
 void HalBoard::playFeedbackTone(uint16_t freq, uint32_t durationMs) {
