@@ -1,0 +1,36 @@
+# 资源避让与依赖过滤 (防止编辑器/监视器后台进程崩溃)
+node_modules/
+.next/
+.venv/
+dist/
+build/
+*.tar.gz
+*.zip
+*.log
+
+# PlatformIO 编译与依赖缓存
+.pio/
+.pioenvs/
+.piolibdeps/
+.clangd/
+compile_commands.json
+
+# 系统与编辑器缓存
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*~
+
+# 敏感配置与密钥凭据 (严格禁止入库)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+credentials.json
+token.json

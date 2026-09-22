@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KunlunActionResult",
+  "type": "object",
+  "required": ["id", "type", "success"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "对应的请求唯一标识"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["result"]
+    },
+    "success": {
+      "type": "boolean",
+      "description": "执行是否成功"
+    },
+    "message": {
+      "type": "string",
+      "description": "人类可读的结果状态或错误信息"
+    },
+    "data": {
+      "type": "object",
+      "description": "可选的返回数据"
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["code", "message"]
+    }
+  },
+  "additionalProperties": false
+}

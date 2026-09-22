@@ -1,0 +1,25 @@
+{
+  "name": "kunlun-bridge",
+  "version": "1.0.0",
+  "description": "macOS Local Bridge for Kunlun Voice Deck",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"No tests specified yet\""
+  },
+  "keywords": ["kunlun", "voice-deck", "macos", "bridge", "hid"],
+  "author": "Kunlun Voice Deck Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ws": "^8.5.10",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
