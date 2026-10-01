@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KunlunConfirmRequired",
+  "description": "二次确认请求 (Bridge -> CoreS3)。Action 被 Security Guard 判定为 CONFIRM 级别时发送，固件须在 expires_in_ms 内回复 confirm 报文。",
+  "type": "object",
+  "required": ["id", "type", "action", "level", "summary", "expires_in_ms"],
+  "properties": {
+    "id": { "type": "string", "description": "对应原始 action 请求的 id" },
+    "type": { "type": "string", "enum": ["confirm_required"] },
+    "action": { "type": "string", "description": "待确认的 Action 标识" },
+    "level": { "type": "string", "enum": ["CONFIRM"] },
+    "summary": { "type": "string", "description": "供屏幕展示的人类可读摘要" },
+    "expires_in_ms": { "type": "integer", "description": "确认窗口有效期 (毫秒)，超时 Bridge 返回 CONFIRM_TIMEOUT" },
+    "timestamp": { "type": "integer" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KunlunStatus",
+  "description": "状态广播 (Bridge -> CoreS3)。连接建立时、周期性以及上下文变化时推送；Phase 2 中 active_app 为占位，Phase 4 由 Context Engine 填充。",
+  "type": "object",
+  "required": ["type", "connection", "timestamp"],
+  "properties": {
+    "type": { "type": "string", "enum": ["status"] },
+    "connection": { "type": "string", "enum": ["online"] },
+    "bridge": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "platform": { "type": "string" },
+        "uptime_ms": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "active_app": { "type": ["string", "null"], "description": "Mac 前台应用名，未知时为 null" },
+    "active_window": { "type": ["string", "null"] },
+    "pending_confirmations": { "type": "integer", "description": "当前连接等待二次确认的 Action 数量" },
+    "timestamp": { "type": "integer" }
+  },
+  "additionalProperties": false
+}

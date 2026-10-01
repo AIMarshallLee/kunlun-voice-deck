@@ -29,7 +29,11 @@
   - **macOS Shortcuts**: `Command + Tab` (App switcher), `Command + Space` (Spotlight), Mission Control, and Desktop minimization.
   - **Composite USB-OTG**: Native USB CDC Serial + USB HID Keyboard/Mouse without third-party drivers.
   - **Dynamic Dark-Mode Deck**: Reactive touch tiles with tactile visual and auditory feedback.
-- [ ] **Phase 2 — macOS Bridge & WebSocket Sync** (In Progress)
+- [x] **Phase 2 — macOS Bridge & WebSocket Sync** (Bridge tested locally / firmware NOT compiled):
+  - **Bridge (TypeScript)**: WebSocket server, JSON-schema validation, `id` pairing, ping/pong heartbeat with offline detection, `status` broadcast;
+  - **Action Router**: `app.open` / `app.close` / `keyboard.shortcut` / `keyboard.press` / `url.open` / `system.volume` / `shell.run` / `workflow.run`;
+  - **Security Guard**: SAFE executes immediately, CONFIRM sends `confirm_required` and waits for on-screen confirmation, DANGEROUS is rejected (`ACTION_FORBIDDEN`);
+  - **Firmware** `net/ws_client` (Wi-Fi + WebSocket client, heartbeat, exponential-backoff reconnect, confirm dialog); deck cards are routed through the Bridge and fall back to native USB HID when offline — **not compiled yet, verify with `pio run`**.
 - [ ] **Phase 3 — Offline Wake-word ("昆仑") & Voice Pipeline** (Planned)
 - [ ] **Phase 4 — Context-Aware Dynamic Deck** (Planned)
 - [ ] **Phase 5 — AI Agent / Codex / Webhook Automations** (Planned)
@@ -101,10 +105,12 @@
    cd bridge
    pnpm install # or npm install
    ```
-2. Start the bridge:
+2. Run the local test suite (no macOS required) and start the bridge:
    ```bash
-   npm run dev
+   npm test
+   npm run dev     # listens on ws://0.0.0.0:8765 by default
    ```
+3. Point the firmware at your Mac via `build_flags` in `firmware/platformio.ini` (`-DKUNLUN_WIFI_SSID`, `-DKUNLUN_WIFI_PASS`, `-DKUNLUN_BRIDGE_HOST`); see `firmware/include/net_config.h`.
 
 ---
 

@@ -35,7 +35,11 @@
   - **macOS 组合快捷键**：`Command + Tab` (应用轮换切换)、`Command + Space` (Spotlight 聚焦搜索)、调度中心与桌面切换；
   - **原生复合免驱**：启用 ESP32-S3 原生 USB-CDC 串口与 USB-HID 键盘/鼠标，插上 Mac 即插即用；
   - **Dynamic Dark-Mode Deck**：触控反馈、状态栏（Wi-Fi、Mac 连接指示灯 ●Mac / ○Mac）。
-- [ ] **Phase 2 — Kunlun Bridge 与 WebSocket 协同** (推进中)
+- [x] **Phase 2 — Kunlun Bridge 与 WebSocket 协同** (Bridge 已本地测试 / 固件未编译)：
+  - **Bridge (TypeScript)**：WebSocket 服务、报文 schema 校验、`id` 配对、ping/pong 心跳与超时判离线、`status` 状态广播；
+  - **Action Router**：`app.open` / `app.close` / `keyboard.shortcut` / `keyboard.press` / `url.open` / `system.volume` / `shell.run` / `workflow.run`；
+  - **Security Guard**：SAFE 直接执行、CONFIRM 回送 `confirm_required` 等待屏幕确认、DANGEROUS 拒绝 (`ACTION_FORBIDDEN`)；
+  - **固件** `net/ws_client` (Wi-Fi + WebSocket 客户端、心跳、指数退避重连、确认弹窗)，卡片动作经 Bridge 下发，离线自动回退 USB HID 直控 —— **代码未编译，需 `pio run` 验证**。
 - [ ] **Phase 3 — 离线唤醒词 ("昆仑") 与语音链路** (规划中)
 - [ ] **Phase 4 — Dynamic Deck 上下文感应** (规划中)
 - [ ] **Phase 5 — AI Agent / Codex / Webhook 调度** (规划中)
@@ -77,8 +81,11 @@
 ```bash
 cd bridge
 npm install
-npm run dev
+npm test        # 本地自动化测试 (不依赖 macOS)
+npm run dev     # 默认监听 ws://0.0.0.0:8765
 ```
+
+固件侧需通过 `firmware/platformio.ini` 的 `build_flags` 指定 `-DKUNLUN_WIFI_SSID`、`-DKUNLUN_WIFI_PASS`、`-DKUNLUN_BRIDGE_HOST` (Mac 局域网 IP)，详见 `firmware/include/net_config.h`。
 
 ---
 
