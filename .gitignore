@@ -3,6 +3,7 @@ node_modules/
 .next/
 .venv/
 dist/
+dist-test/
 build/
 *.tar.gz
 *.zip

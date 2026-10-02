@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KunlunPing",
+  "description": "心跳请求 (CoreS3 -> Bridge)。Bridge 以 pong 回复；超过 heartbeat.timeoutMs 未收到任何报文则判定离线。",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "enum": ["ping"] },
+    "timestamp": { "type": "integer", "description": "毫秒级 Unix 时间戳 (可为设备 millis)" }
+  },
+  "additionalProperties": false
+}

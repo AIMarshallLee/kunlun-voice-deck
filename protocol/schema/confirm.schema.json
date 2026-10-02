@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KunlunConfirm",
+  "description": "二次确认应答 (CoreS3 -> Bridge)。用户在触摸屏点击确认/取消后发送，id 必须与 confirm_required 一致。",
+  "type": "object",
+  "required": ["id", "type", "accepted"],
+  "properties": {
+    "id": { "type": "string", "description": "对应 confirm_required 的 id" },
+    "type": { "type": "string", "enum": ["confirm"] },
+    "accepted": { "type": "boolean", "description": "true 执行，false 取消" },
+    "timestamp": { "type": "integer" }
+  },
+  "additionalProperties": false
+}

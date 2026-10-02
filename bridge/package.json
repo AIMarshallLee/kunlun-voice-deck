@@ -7,9 +7,15 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "echo \"No tests specified yet\""
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/test/*.test.js"
   },
-  "keywords": ["kunlun", "voice-deck", "macos", "bridge", "hid"],
+  "keywords": [
+    "kunlun",
+    "voice-deck",
+    "macos",
+    "bridge",
+    "hid"
+  ],
   "author": "Kunlun Voice Deck Contributors",
   "license": "MIT",
   "dependencies": {
@@ -21,5 +27,9 @@
     "@types/ws": "^8.5.10",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.6"
   }
 }
